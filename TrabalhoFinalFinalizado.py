@@ -3,23 +3,40 @@ import time
 def encontrar_palavras(matriz, palavras):
     if not matriz or not matriz[0]:
         return []
+
     linhas, colunas = len(matriz), len(matriz[0])
+
     visitado = [[False for _ in range(colunas)] for _ in range(linhas)] 
+    
     palavras_encontradas = []
 
     for palavra in palavras:
+
+        start_busca_palavra = time.perf_counter()
+        
+
         caminho_encontrado = buscar_palavra(matriz, palavra, visitado)
+        
+
+        end_busca_palavra = time.perf_counter()
+
         if caminho_encontrado:
             palavras_encontradas.append(palavra)
+
+            for r, c in caminho_encontrado:
+                visitado[r][c] = True
     
     return palavras_encontradas
 
 
 def buscar_palavra(matriz, palavra, visitado):
     linhas, colunas = len(matriz), len(matriz[0])
+
     for r in range(linhas):
         for c in range(colunas):
+
             if not visitado[r][c] and matriz[r][c] == palavra[0]:
+
                 caminho = busca_recursiva(matriz, palavra, r, c, 0, visitado)
                 if caminho:
                     return caminho
@@ -29,21 +46,31 @@ def buscar_palavra(matriz, palavra, visitado):
 def busca_recursiva(matriz, palavra, r, c, index, visitado):
     if matriz[r][c] != palavra[index]:
         return None
+
     if index == len(palavra) - 1:
-        visitado[r][c] = True
         return [(r, c)] 
+
     visitado[r][c] = True
+
     for dr in [-1, 0, 1]:
         for dc in [-1, 0, 1]:
             if dr == 0 and dc == 0:
                 continue
+            
             proximo_r, proximo_c = r + dr, c + dc
+            
             linhas, colunas = len(matriz), len(matriz[0])
             if (0 <= proximo_r < linhas and 0 <= proximo_c < colunas and
                     not visitado[proximo_r][proximo_c]):
+                
                 caminho_parcial = busca_recursiva(matriz, palavra, proximo_r, proximo_c, index + 1, visitado)
+                
                 if caminho_parcial:
+
+                    visitado[r][c] = False 
                     return [(r, c)] + caminho_parcial
+
+
     visitado[r][c] = False
     return None
 
