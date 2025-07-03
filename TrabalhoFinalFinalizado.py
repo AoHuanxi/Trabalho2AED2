@@ -13,18 +13,13 @@ def encontrar_palavras(matriz, palavras):
     for palavra in palavras:
 
         start_busca_palavra = time.perf_counter()
-        
 
         caminho_encontrado = buscar_palavra(matriz, palavra, visitado)
         
-
         end_busca_palavra = time.perf_counter()
 
         if caminho_encontrado:
             palavras_encontradas.append(palavra)
-
-            for r, c in caminho_encontrado:
-                visitado[r][c] = True
     
     return palavras_encontradas
 
@@ -48,6 +43,7 @@ def busca_recursiva(matriz, palavra, r, c, index, visitado):
         return None
 
     if index == len(palavra) - 1:
+        visitado[r][c] = True
         return [(r, c)] 
 
     visitado[r][c] = True
@@ -66,8 +62,6 @@ def busca_recursiva(matriz, palavra, r, c, index, visitado):
                 caminho_parcial = busca_recursiva(matriz, palavra, proximo_r, proximo_c, index + 1, visitado)
                 
                 if caminho_parcial:
-
-                    visitado[r][c] = False 
                     return [(r, c)] + caminho_parcial
 
 
@@ -109,11 +103,11 @@ if __name__ == "__main__":
 
     print("--- Teste com Matriz e Palavras Maiores ---")
     matriz_grande = [
-        ['A', 'B', 'C', 'D', 'E'],
-        ['F', 'G', 'H', 'I', 'J'],
-        ['K', 'L', 'M', 'N', 'O'],
-        ['P', 'Q', 'R', 'S', 'T'],
-        ['U', 'V', 'W', 'X', 'Y']
+        ['A', 'B', 'C', 'D', 'H'],
+        ['F', 'G', 'H', 'E', 'J'],
+        ['K', 'L', 'M', 'L', 'O'],
+        ['P', 'Y', 'T', 'S', 'L'],
+        ['N', 'O', 'H', 'X', 'O']
     ]
     palavras_grandes_a_buscar = ["HELLO", "WORLD", "PYTHON", "PROGRAM", "TABLE"]
 
