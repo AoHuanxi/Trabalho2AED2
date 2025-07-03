@@ -103,11 +103,11 @@ if __name__ == "__main__":
 
     print("--- Teste com Matriz e Palavras Maiores ---")
     matriz_grande = [
-        ['A', 'B', 'C', 'D', 'H'],
-        ['F', 'G', 'H', 'E', 'J'],
-        ['K', 'L', 'M', 'L', 'O'],
-        ['P', 'Y', 'T', 'S', 'L'],
-        ['N', 'O', 'H', 'X', 'O']
+        ['A', 'B', 'C', 'D', 'E'],
+        ['F', 'G', 'H', 'I', 'J'],
+        ['K', 'L', 'M', 'N', 'O'],
+        ['P', 'Q', 'R', 'S', 'T'],
+        ['U', 'V', 'W', 'X', 'Y']
     ]
     palavras_grandes_a_buscar = ["HELLO", "WORLD", "PYTHON", "PROGRAM", "TABLE"]
 
